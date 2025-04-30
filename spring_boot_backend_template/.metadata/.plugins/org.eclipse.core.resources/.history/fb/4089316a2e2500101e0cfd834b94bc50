@@ -1,0 +1,62 @@
+package com.blogs.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.blogs.dao.EmployeeDao;
+import com.blogs.entity.Employee;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class EmployeeServiceImpl  implements EmployeeService{
+	
+	@Autowired
+	private EmployeeDao empDao;
+
+	@Override
+	public List<Employee> getallEmployee() {
+		
+		return empDao.findAll();
+	}
+
+	@Override
+	public Employee add(Employee employee) {
+		
+		return empDao.save(employee);
+	}
+
+	@Override
+	public Employee update(Long id, Employee e) {
+		Optional<Employee> emp=empDao.findById(id);
+		if(emp.isPresent()) {
+			Employee em=emp.get();
+			em.setName(e.getName());
+			em.setDesignation(e.getDesignation());
+			em.setSalary(e.getSalary());
+			return empDao.save(em);
+			
+		}
+		else
+		{
+			throw new RuntimeException("Employee not found with ID : "+ id);  
+		}
+		
+	}
+
+	@Override
+	public String deleteEmployee(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+	
+	
+
+}

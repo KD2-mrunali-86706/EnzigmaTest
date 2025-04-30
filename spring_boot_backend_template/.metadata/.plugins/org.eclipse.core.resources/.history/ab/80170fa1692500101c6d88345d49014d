@@ -1,0 +1,26 @@
+package com.blogs.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.blogs.dao.EmployeeDao;
+import com.blogs.dao.TaskDao;
+import com.blogs.entity.Task;
+
+import jakarta.transaction.Transactional;
+@Service
+@Transactional
+
+public class TaskServiceImpl  implements TaskService {
+	@Autowired
+	private TaskDao taskDao;
+
+	@Override
+	public List<Task> getalltask() {
+		
+		return taskDao.findAll();
+	}
+
+}

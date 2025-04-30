@@ -1,0 +1,12 @@
+package com.blogs.service;
+
+import java.util.List;
+
+import com.blogs.entity.Employee;
+
+public interface EmployeeService {
+	public List<Employee> getallEmployee();
+   public  Employee add(Employee employee);
+   Employee update(Long id,Employee e);
+   
+}
